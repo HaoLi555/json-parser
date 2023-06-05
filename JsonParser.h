@@ -16,12 +16,12 @@ enum ValueType
     Array
 };
 
-class JsonP;      // 一个JSON对象
-class ValueArray; // 一个JSON数组
+class JsonObject;      // 一个JSON对象
+class JsonArray; // 一个JSON数组
 class JsonItem;   // 一个键值对
 class JsonValue;  // 一个值
 
-class JsonP
+class JsonObject
 {
     vector<JsonItem *> items;
 
@@ -31,8 +31,8 @@ public:
     void insertInt(const char *key, int value);
     void insertDouble(const char *key, double value);
     void insertString(const char *key, const char *value);
-    void insertJson(const char *key, JsonP *value);
-    void insertArray(const char *key, ValueArray *value);
+    void insertJson(const char *key, JsonObject *value);
+    void insertArray(const char *key, JsonArray *value);
 };
 
 class JsonItem
@@ -53,7 +53,7 @@ public:
     JsonValue(ValueType _type, void *_value);
 };
 
-class ValueArray
+class JsonArray
 {
 public:
     vector<JsonValue *> array;
@@ -62,6 +62,6 @@ public:
     void addInt(int value);
     void addDouble(double value);
     void addString(const char *value);
-    void addJson(JsonP *value);
-    void addArray(ValueArray *value);
+    void addJson(JsonObject *value);
+    void addArray(JsonArray *value);
 };
