@@ -6,7 +6,7 @@
 using namespace std;
 
 class JsonP; // 一个JSON对象
-class JsonValue;
+// class JsonValue;
 class JsonItem; // 一个键值对
 class ValueBool;
 class ValueNull;
@@ -20,43 +20,47 @@ class ValueArray;
 class JsonP{
     vector<JsonItem *> items;
 public:
-    void insertItemToObject(JsonItem* item);
+    // void insertItemToObject(JsonItem* item);
+    void insertNull(const char *key);
 };
 
-class JsonValue{
-};
+// class JsonValue{
+// };
 
 class JsonItem
 {
     string key;
-    JsonValue value;
+    void* value_ptr;
+public:
+    JsonItem(const char *_key, void*_value_ptr);
 };
 
-class ValueBool:public JsonValue{
+class ValueBool{
     bool value;
 };
 
-class ValueNull:public JsonValue{
+class ValueNull{
+public:
     static const char* value;
 };
 const char *ValueNull::value = "null";
 
-class ValueInt:public JsonValue{
+class ValueInt{
     int value;
 };
 
-class ValueDouble:public JsonValue{
+class ValueDouble{
     double value;
 };
 
-class ValueString:public JsonValue{
+class ValueString{
     string value;
 };
 
-class ValueJson:public JsonValue{
+class ValueJson{
     JsonP* value;
 };
 
-class ValueArray:public JsonValue{
-    vector<JsonValue*> value;
+class ValueArray{
+    vector<void*> value;
 };
