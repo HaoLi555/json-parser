@@ -18,12 +18,12 @@ enum ValueType
 
 class JsonObject;      // 一个JSON对象
 class JsonArray; // 一个JSON数组
-class JsonItem;   // 一个键值对
-class JsonValue;  // 一个值
+class JsonObjectItem;   // 一个键值对
+class JsonArrayItem;  // 一个值
 
 class JsonObject
 {
-    vector<JsonItem *> items;
+    vector<JsonObjectItem *> items;
 
 public:
     void insertNull(const char *key);
@@ -33,30 +33,34 @@ public:
     void insertString(const char *key, const char *value);
     void insertJson(const char *key, JsonObject *value);
     void insertArray(const char *key, JsonArray *value);
+
+
+
+    void dump(const char *file_name);
 };
 
-class JsonItem
+class JsonObjectItem
 {
     string key;
     ValueType type;
     void *value_ptr;
 
 public:
-    JsonItem(const char *_key, ValueType _type, void *_value_ptr);
+    JsonObjectItem(const char *_key, ValueType _type, void *_value_ptr);
 };
 
-class JsonValue
+class JsonArrayItem
 {
 public:
     ValueType type;
     void *value;
-    JsonValue(ValueType _type, void *_value);
+    JsonArrayItem(ValueType _type, void *_value);
 };
 
 class JsonArray
 {
 public:
-    vector<JsonValue *> array;
+    vector<JsonArrayItem *> array;
     void addNull();
     void addBool(bool value);
     void addInt(int value);
@@ -64,4 +68,7 @@ public:
     void addString(const char *value);
     void addJson(JsonObject *value);
     void addArray(JsonArray *value);
+
+    void dump(const char *file_name);
+
 };
