@@ -20,7 +20,7 @@ optional<bool> JsonItem::getBoolItem()
     else
     {
 
-        return *((bool *)value_ptr);
+        return *((bool*)value_ptr);
     }
 }
 
@@ -31,7 +31,7 @@ optional<int> JsonItem::getIntItem()
     else
     {
 
-        return *((int *)value_ptr);
+        return *((int*)value_ptr);
     }
 }
 
@@ -42,7 +42,7 @@ optional<double> JsonItem::getDoubleItem()
     else
     {
 
-        return *((double *)value_ptr);
+        return *((double*)value_ptr);
     }
 }
 
@@ -53,33 +53,33 @@ optional<string> JsonItem::getStringItem()
     else
     {
 
-        return *((string *)value_ptr);
+        return *((string*)value_ptr);
     }
 }
 
-optional<JsonObject *> JsonItem::getJsonObjectItem()
+optional<JsonObject*> JsonItem::getJsonObjectItem()
 {
     if (type != Object)
         return nullopt;
     else
     {
 
-        return (JsonObject *)value_ptr;
+        return (JsonObject*)value_ptr;
     }
 }
 
-optional<JsonArray *> JsonItem::getJsonArrayItem()
+optional<JsonArray*> JsonItem::getJsonArrayItem()
 {
     if (type != Array)
         return nullopt;
     else
     {
 
-        return (JsonArray *)value_ptr;
+        return (JsonArray*)value_ptr;
     }
 }
 
-JsonObjectItem::JsonObjectItem(const char *_key, ValueType _type, void *_value_ptr)
+JsonObjectItem::JsonObjectItem(const char* _key, ValueType _type, void* _value_ptr)
 {
     string s(_key);
     key = s;
@@ -87,7 +87,7 @@ JsonObjectItem::JsonObjectItem(const char *_key, ValueType _type, void *_value_p
     value_ptr = _value_ptr;
 }
 
-JsonObjectItem::JsonObjectItem(string _key, ValueType _type, void *_value_ptr)
+JsonObjectItem::JsonObjectItem(string _key, ValueType _type, void* _value_ptr)
 {
 
     key = _key;
@@ -95,59 +95,59 @@ JsonObjectItem::JsonObjectItem(string _key, ValueType _type, void *_value_ptr)
     value_ptr = _value_ptr;
 }
 
-void JsonObject::insertNull(const char *key)
+void JsonObject::insertNull(const char* key)
 {
     // 对于null值的处理：用一个空指针表示
-    JsonObjectItem *i = new JsonObjectItem(key, Null, nullptr);
+    JsonObjectItem* i = new JsonObjectItem(key, Null, nullptr);
     this->items.push_back(i);
 }
 
-void JsonObject::insertBool(const char *key, bool value)
+void JsonObject::insertBool(const char* key, bool value)
 {
-    bool *vp = new bool(value);
-    JsonObjectItem *i = new JsonObjectItem(key, Bool, vp);
+    bool* vp = new bool(value);
+    JsonObjectItem* i = new JsonObjectItem(key, Bool, vp);
     this->items.push_back(i);
 }
 
-void JsonObject::insertInt(const char *key, int value)
+void JsonObject::insertInt(const char* key, int value)
 {
-    int *vp = new int(value);
-    JsonObjectItem *i = new JsonObjectItem(key, Int, vp);
+    int* vp = new int(value);
+    JsonObjectItem* i = new JsonObjectItem(key, Int, vp);
     this->items.push_back(i);
 }
 
-void JsonObject::insertDouble(const char *key, double value)
+void JsonObject::insertDouble(const char* key, double value)
 {
-    double *vp = new double(value);
-    JsonObjectItem *i = new JsonObjectItem(key, Double, vp);
+    double* vp = new double(value);
+    JsonObjectItem* i = new JsonObjectItem(key, Double, vp);
     this->items.push_back(i);
 }
 
-void JsonObject::insertString(const char *key, const char *value)
+void JsonObject::insertString(const char* key, const char* value)
 {
-    string *vp = new string(value);
-    JsonObjectItem *i = new JsonObjectItem(key, String, vp);
+    string* vp = new string(value);
+    JsonObjectItem* i = new JsonObjectItem(key, String, vp);
     this->items.push_back(i);
 }
 
-void JsonObject::insertJson(const char *key, JsonObject *value)
+void JsonObject::insertJson(const char* key, JsonObject* value)
 {
-    JsonObjectItem *i = new JsonObjectItem(key, Object, value);
+    JsonObjectItem* i = new JsonObjectItem(key, Object, value);
     this->items.push_back(i);
 }
 
-void JsonObject::insertArray(const char *key, JsonArray *value)
+void JsonObject::insertArray(const char* key, JsonArray* value)
 {
-    JsonObjectItem *i = new JsonObjectItem(key, Array, value);
+    JsonObjectItem* i = new JsonObjectItem(key, Array, value);
     this->items.push_back(i);
 }
 
-void JsonObject::insertItem(JsonObjectItem *i)
+void JsonObject::insertItem(JsonObjectItem* i)
 {
     items.push_back(i);
 }
 
-void JsonObject::removeItem(const char *key)
+void JsonObject::removeItem(const char* key)
 {
     string obj_key(key);
     for (auto it = items.begin(); it != items.end(); it++)
@@ -161,7 +161,7 @@ void JsonObject::removeItem(const char *key)
     }
 }
 
-JsonArrayItem::JsonArrayItem(ValueType _type, void *_value_ptr)
+JsonArrayItem::JsonArrayItem(ValueType _type, void* _value_ptr)
 {
     type = _type;
     value_ptr = _value_ptr;
@@ -170,51 +170,51 @@ JsonArrayItem::JsonArrayItem(ValueType _type, void *_value_ptr)
 void JsonArray::addNull()
 {
     // 对null值的处理：用一个空指针表示
-    JsonArrayItem *v = new JsonArrayItem(Null, nullptr);
+    JsonArrayItem* v = new JsonArrayItem(Null, nullptr);
     this->items.push_back(v);
 }
 
 void JsonArray::addBool(bool value)
 {
-    bool *b = new bool(value);
-    JsonArrayItem *v = new JsonArrayItem(Bool, b);
+    bool* b = new bool(value);
+    JsonArrayItem* v = new JsonArrayItem(Bool, b);
     this->items.push_back(v);
 }
 
 void JsonArray::addInt(int value)
 {
-    int *i = new int(value);
-    JsonArrayItem *v = new JsonArrayItem(Bool, i);
+    int* i = new int(value);
+    JsonArrayItem* v = new JsonArrayItem(Bool, i);
     this->items.push_back(v);
 }
 
 void JsonArray::addDouble(double value)
 {
-    double *d = new double(value);
-    JsonArrayItem *v = new JsonArrayItem(Double, d);
+    double* d = new double(value);
+    JsonArrayItem* v = new JsonArrayItem(Double, d);
     this->items.push_back(v);
 }
 
-void JsonArray::addString(const char *value)
+void JsonArray::addString(const char* value)
 {
-    string *s = new string(value);
-    JsonArrayItem *v = new JsonArrayItem(String, s);
+    string* s = new string(value);
+    JsonArrayItem* v = new JsonArrayItem(String, s);
     this->items.push_back(v);
 }
 
-void JsonArray::addJson(JsonObject *value)
+void JsonArray::addJson(JsonObject* value)
 {
-    JsonArrayItem *v = new JsonArrayItem(Object, value);
+    JsonArrayItem* v = new JsonArrayItem(Object, value);
     this->items.push_back(v);
 }
 
-void JsonArray::addArray(JsonArray *value)
+void JsonArray::addArray(JsonArray* value)
 {
-    JsonArrayItem *v = new JsonArrayItem(Array, value);
+    JsonArrayItem* v = new JsonArrayItem(Array, value);
     this->items.push_back(v);
 }
 
-void JsonArray::insertItem(JsonArrayItem *i)
+void JsonArray::insertItem(JsonArrayItem* i)
 {
 
     this->items.push_back(i);
@@ -232,7 +232,7 @@ void JsonArray::removeItem(int index)
 }
 
 // 根据key索引键值对，没查找到时返回空指针
-JsonObjectItem *JsonObject::getItemByName(const char *key)
+JsonObjectItem* JsonObject::getItemByName(const char* key)
 {
     string temp(key);
     for (auto item_ptr : this->items)
@@ -246,7 +246,7 @@ JsonObjectItem *JsonObject::getItemByName(const char *key)
 }
 
 // 根据位置索引变量值，没查找到时返回空指针
-JsonArrayItem *JsonArray::getItemByIndex(int index)
+JsonArrayItem* JsonArray::getItemByIndex(int index)
 {
     try
     {
@@ -258,9 +258,9 @@ JsonArrayItem *JsonArray::getItemByIndex(int index)
     }
 }
 
-void JsonObject::dump(const char *file_name)
+void JsonObject::dump(const char* file_name)
 {
-    FILE *errfp;
+    FILE* errfp;
     freopen_s(&errfp, file_name, "w", stdout);
     cout << "{" << endl;
     for (int i = 0; i < items.size(); i++)
@@ -288,26 +288,26 @@ void JsonObjectItem::printItem(int depth)
     switch (type)
     {
     case ValueType::Bool:
-        if (*((bool *)value_ptr))
+        if (*((bool*)value_ptr))
             cout << "true";
         else
             cout << "false";
         break;
     case ValueType::Double:
-        cout << *((double *)value_ptr);
+        cout << *((double*)value_ptr);
         break;
     case ValueType::Int:
-        cout << *((int *)value_ptr);
+        cout << *((int*)value_ptr);
         break;
     case ValueType::Null:
         cout << "null";
         break;
     case ValueType::String:
-        cout << "\"" << *((string *)value_ptr) << "\"";
+        cout << "\"" << *((string*)value_ptr) << "\"";
         break;
     case ValueType::Object:
     {
-        vector<JsonObjectItem *> &items = ((JsonObject *)value_ptr)->items;
+        vector<JsonObjectItem*>& items = ((JsonObject*)value_ptr)->items;
         cout << "{" << endl;
         for (int i = 0; i < items.size(); i++)
         {
@@ -325,7 +325,7 @@ void JsonObjectItem::printItem(int depth)
 
     case ValueType::Array:
     {
-        vector<JsonArrayItem *> &items = ((JsonArray *)value_ptr)->items;
+        vector<JsonArrayItem*>& items = ((JsonArray*)value_ptr)->items;
         cout << "[" << endl;
         for (int i = 0; i < items.size(); i++)
         {
@@ -354,26 +354,26 @@ void JsonArrayItem::printItem(int depth)
     switch (type)
     {
     case ValueType::Bool:
-        if (*((bool *)value_ptr))
+        if (*((bool*)value_ptr))
             cout << "true";
         else
             cout << "false";
         break;
     case ValueType::Double:
-        cout << *((double *)value_ptr);
+        cout << *((double*)value_ptr);
         break;
     case ValueType::Int:
-        cout << *((int *)value_ptr);
+        cout << *((int*)value_ptr);
         break;
     case ValueType::Null:
         cout << "null";
         break;
     case ValueType::String:
-        cout << "\"" << *((string *)value_ptr) << "\"";
+        cout << "\"" << *((string*)value_ptr) << "\"";
         break;
     case ValueType::Object:
     {
-        vector<JsonObjectItem *> &items = ((JsonObject *)value_ptr)->items;
+        vector<JsonObjectItem*>& items = ((JsonObject*)value_ptr)->items;
         cout << "{" << endl;
         for (int i = 0; i < items.size(); i++)
         {
@@ -391,7 +391,7 @@ void JsonArrayItem::printItem(int depth)
 
     case ValueType::Array:
     {
-        vector<JsonArrayItem *> &items = ((JsonArray *)value_ptr)->items;
+        vector<JsonArrayItem*>& items = ((JsonArray*)value_ptr)->items;
         cout << "[" << endl;
         for (int i = 0; i < items.size(); i++)
         {
@@ -412,10 +412,12 @@ void JsonArrayItem::printItem(int depth)
     }
 }
 
-JsonObjectItem *parseObjectItem(stringstream &sstream)
+optional<JsonObjectItem*> parseObjectItem(stringstream& sstream)
 {
     while (sstream.peek() == ' ' || sstream.peek() == '\t' || sstream.peek() == '\n')
         sstream.get();
+    // 第一个字符不是引号说明解析的对象是空的
+    if (sstream.peek() != '\"') return nullopt;
     string key;
     sstream.get(); // 掠过引号
     while (sstream.peek() != '\"')
@@ -437,7 +439,7 @@ JsonObjectItem *parseObjectItem(stringstream &sstream)
         {
             sstream.get();
         }
-        JsonObjectItem *ans = new JsonObjectItem(key, ValueType::Null, nullptr);
+        JsonObjectItem* ans = new JsonObjectItem(key, ValueType::Null, nullptr);
         return ans;
     }
     case 'f':
@@ -446,8 +448,8 @@ JsonObjectItem *parseObjectItem(stringstream &sstream)
         {
             sstream.get();
         }
-        bool *vp = new bool(false);
-        JsonObjectItem *ans = new JsonObjectItem(key, ValueType::Bool, vp);
+        bool* vp = new bool(false);
+        JsonObjectItem* ans = new JsonObjectItem(key, ValueType::Bool, vp);
         return ans;
     }
     case 't':
@@ -456,53 +458,59 @@ JsonObjectItem *parseObjectItem(stringstream &sstream)
         {
             sstream.get();
         }
-        bool *vp = new bool(true);
-        JsonObjectItem *ans = new JsonObjectItem(key, ValueType::Bool, vp);
+        bool* vp = new bool(true);
+        JsonObjectItem* ans = new JsonObjectItem(key, ValueType::Bool, vp);
         return ans;
     }
     case '\"':
     {
         sstream.get(); // 处理单引号
-        string *v = new string;
+        string* v = new string;
         while (sstream.peek() != '\"')
         {
             v->push_back(sstream.peek());
             sstream.get();
         }
         sstream.get();
-        JsonObjectItem *ans = new JsonObjectItem(key, ValueType::String, v);
+        JsonObjectItem* ans = new JsonObjectItem(key, ValueType::String, v);
         return ans;
     }
     case '{':
     {
         sstream.get(); // 处理'{'
-        JsonObject *jo = new JsonObject;
+        JsonObject* jo = new JsonObject;
         do
         {
             if (sstream.peek() == ',')
                 sstream.get();
-            jo->insertItem(parseObjectItem(sstream));
+            auto opt = parseObjectItem(sstream);
+            // 空对象
+            if (!opt.has_value()) break;
+            jo->insertItem(opt.value());
             while (sstream.peek() != ',' && sstream.peek() != '}')
                 sstream.get();
         } while (sstream.peek() != '}');
         sstream.get(); // 掠过'}'
-        JsonObjectItem *ans = new JsonObjectItem(key, ValueType::Object, jo);
+        JsonObjectItem* ans = new JsonObjectItem(key, ValueType::Object, jo);
         return ans;
     }
     case '[':
     {
         sstream.get(); // 处理'['
-        JsonArray *ja = new JsonArray;
+        JsonArray* ja = new JsonArray;
         do
         {
             if (sstream.peek() == ',')
                 sstream.get();
-            ja->insertItem(parseArrayItem(sstream));
+            auto opt = parseArrayItem(sstream);
+            // 空数组
+            if (!opt.has_value()) break;
+            ja->insertItem(opt.value());
             while (sstream.peek() != ',' && sstream.peek() != ']')
                 sstream.get();
         } while (sstream.peek() != ']');
         sstream.get(); // 掠过']'
-        JsonObjectItem *ans = new JsonObjectItem(key, ValueType::Array, ja);
+        JsonObjectItem* ans = new JsonObjectItem(key, ValueType::Array, ja);
         return ans;
     }
     // 数字
@@ -516,15 +524,15 @@ JsonObjectItem *parseObjectItem(stringstream &sstream)
                 is_double = true;
             temp.push_back(sstream.get());
         }
-        JsonObjectItem *ans;
+        JsonObjectItem* ans;
         if (is_double)
         {
-            double *d = new double(stod(temp));
+            double* d = new double(stod(temp));
             ans = new JsonObjectItem(key, ValueType::Double, d);
         }
         else
         {
-            int *i = new int(stoi(temp));
+            int* i = new int(stoi(temp));
             ans = new JsonObjectItem(key, ValueType::Int, i);
         }
         return ans;
@@ -533,10 +541,12 @@ JsonObjectItem *parseObjectItem(stringstream &sstream)
     }
 }
 
-JsonArrayItem *parseArrayItem(stringstream &sstream)
+optional<JsonArrayItem*> parseArrayItem(stringstream& sstream)
 {
     while (sstream.peek() == ' ' || sstream.peek() == '\t' || sstream.peek() == '\n')
         sstream.get();
+    // 数组为空
+    if (sstream.peek() == ']') return nullopt;
     switch (sstream.peek())
     {
     case 'n':
@@ -545,7 +555,7 @@ JsonArrayItem *parseArrayItem(stringstream &sstream)
         {
             sstream.get();
         }
-        JsonArrayItem *ans = new JsonArrayItem(ValueType::Null, nullptr);
+        JsonArrayItem* ans = new JsonArrayItem(ValueType::Null, nullptr);
         return ans;
     }
     case 'f':
@@ -554,8 +564,8 @@ JsonArrayItem *parseArrayItem(stringstream &sstream)
         {
             sstream.get();
         }
-        bool *vp = new bool(false);
-        JsonArrayItem *ans = new JsonArrayItem(ValueType::Bool, vp);
+        bool* vp = new bool(false);
+        JsonArrayItem* ans = new JsonArrayItem(ValueType::Bool, vp);
         return ans;
     }
     case 't':
@@ -564,56 +574,62 @@ JsonArrayItem *parseArrayItem(stringstream &sstream)
         {
             sstream.get();
         }
-        bool *vp = new bool(true);
-        JsonArrayItem *ans = new JsonArrayItem(ValueType::Bool, vp);
+        bool* vp = new bool(true);
+        JsonArrayItem* ans = new JsonArrayItem(ValueType::Bool, vp);
         return ans;
     }
     case '\"':
     {
         sstream.get(); // 处理单引号
-        string *v = new string;
+        string* v = new string;
         while (sstream.peek() != '\"')
         {
             v->push_back(sstream.peek());
             sstream.get();
         }
         sstream.get();
-        JsonArrayItem *ans = new JsonArrayItem(ValueType::String, v);
+        JsonArrayItem* ans = new JsonArrayItem(ValueType::String, v);
         return ans;
     }
     case '{':
     {
         sstream.get(); // 处理'{'
-        JsonObject *jo = new JsonObject;
+        JsonObject* jo = new JsonObject;
         do
         {
             if (sstream.peek() == ',')
                 sstream.get();
-            jo->insertItem(parseObjectItem(sstream));
+            auto opt = parseObjectItem(sstream);
+            // 空对象
+            if (!opt.has_value()) break;
+            jo->insertItem(opt.value());
             while (sstream.peek() != ',' && sstream.peek() != '}')
                 sstream.get();
         } while (sstream.peek() != '}');
         sstream.get(); // 掠过'}'
-        JsonArrayItem *ans = new JsonArrayItem(ValueType::Object, jo);
+        JsonArrayItem* ans = new JsonArrayItem(ValueType::Object, jo);
         return ans;
     }
     case '[':
     {
         sstream.get(); // 处理'['
-        JsonArray *ja = new JsonArray;
+        JsonArray* ja = new JsonArray;
         do
         {
             if (sstream.peek() == ',')
                 sstream.get();
-            ja->insertItem(parseArrayItem(sstream));
+            auto opt = parseArrayItem(sstream);
+            // 空数组
+            if (!opt.has_value()) break;
+            ja->insertItem(opt.value());
             while (sstream.peek() != ',' && sstream.peek() != ']')
                 sstream.get();
         } while (sstream.peek() != ']');
         sstream.get(); // 掠过']'
-        JsonArrayItem *ans = new JsonArrayItem(ValueType::Array, ja);
+        JsonArrayItem* ans = new JsonArrayItem(ValueType::Array, ja);
         return ans;
     }
-        // 数字
+    // 数字
     default:
     {
         string temp;
@@ -624,15 +640,15 @@ JsonArrayItem *parseArrayItem(stringstream &sstream)
                 is_double = true;
             temp.push_back(sstream.get());
         }
-        JsonArrayItem *ans;
+        JsonArrayItem* ans;
         if (is_double)
         {
-            double *d = new double(stod(temp));
+            double* d = new double(stod(temp));
             ans = new JsonArrayItem(ValueType::Double, d);
         }
         else
         {
-            int *i = new int(stoi(temp));
+            int* i = new int(stoi(temp));
             ans = new JsonArrayItem(ValueType::Int, i);
         }
         return ans;
@@ -641,7 +657,7 @@ JsonArrayItem *parseArrayItem(stringstream &sstream)
     }
 }
 
-void JsonObject::parseObject(const char *file_name)
+void JsonObject::parseObject(const char* file_name)
 {
     ifstream f(file_name);
     stringstream sstream;
@@ -654,7 +670,10 @@ void JsonObject::parseObject(const char *file_name)
     {
         if (sstream.peek() == ',')
             sstream.get();
-        this->insertItem(parseObjectItem(sstream));
+        auto opt = parseObjectItem(sstream);
+        // 空对象
+        if (!opt.has_value()) break;
+        this->insertItem(opt.value());
         while (sstream.peek() != ',' && sstream.peek() != '}')
             sstream.get();
     } while (sstream.peek() != '}');
