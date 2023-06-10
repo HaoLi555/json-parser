@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// JSON格式的变量类型
 enum ValueType
 {
     Bool,
@@ -19,7 +20,7 @@ enum ValueType
     Array
 };
 
-class JsonItem;
+class JsonItem;       // JsonArrayItem和JsonObjectItem的父类
 class JsonObject;     // 一个JSON对象
 class JsonArray;      // 一个JSON数组
 class JsonObjectItem; // 一个键值对
@@ -32,6 +33,7 @@ public:
     ValueType type;
     void *value_ptr;
 
+    // 下列函数用于获取具体变量值——实际应用中可以利用这些函数获取load的.json文件中的变量
     bool isItemNull();
     optional<bool> getBoolItem();
     optional<int> getIntItem();

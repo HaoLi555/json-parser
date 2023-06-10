@@ -27,7 +27,7 @@ int main()
 
     cout << her_json->getItemByName("crush?")->getJsonObjectItem().value()->getItemByName("do some for me")->getJsonArrayItem().value()->getItemByIndex(4)->getStringItem().value() << endl;
 
-    her_json->dump("F:\\1大二下\\OOP\\test\\initial_test.txt");
+    her_json->dump("F:\\1大二下\\OOP\\test\\initial_test.json");
 
     her_json->insertBool("great", true);
     her_json->insertString("major", "CS");
@@ -50,17 +50,17 @@ int main()
 
     her_json->insertArray("why", her_array);
 
-    her_json->dump("F:\\1大二下\\OOP\\test\\add_test.txt");
+    her_json->dump("F:\\1大二下\\OOP\\test\\add_test.json");
 
     JsonObject *parsejson = new JsonObject;
-    parsejson->parseObject("F:\\1大二下\\OOP\\test\\unformatted_parse_test.txt");
+    parsejson->parseObject("F:\\1大二下\\OOP\\test\\unformatted_parse_test.json");
 
-    parsejson->dump("F:\\1大二下\\OOP\\test\\formatted_print_test.txt");
+    parsejson->dump("F:\\1大二下\\OOP\\test\\formatted_print_test.json");
 
     her_json->removeItem("her array is the same as mine ");
     her_json->insertString("this is a test for modify", "so that you can change the JsonObject variable by removing and inserting");
 
-    her_json->dump("F:\\1大二下\\OOP\\test\\modify_test.txt");
+    her_json->dump("F:\\1大二下\\OOP\\test\\modify_test.json");
 
     delete my_array;
     delete my_obj;
