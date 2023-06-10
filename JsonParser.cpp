@@ -79,7 +79,6 @@ optional<JsonArray *> JsonItem::getJsonArrayItem()
     }
 }
 
-// @疑问：声明与定义
 JsonObjectItem::JsonObjectItem(const char *_key, ValueType _type, void *_value_ptr)
 {
     string s(_key);
@@ -98,7 +97,7 @@ JsonObjectItem::JsonObjectItem(string _key, ValueType _type, void *_value_ptr)
 
 void JsonObject::insertNull(const char *key)
 {
-    // ValueNull *vp = new ValueNull();
+    // 对于null值的处理：用一个空指针表示
     JsonObjectItem *i = new JsonObjectItem(key, Null, nullptr);
     this->items.push_back(i);
 }
@@ -170,6 +169,7 @@ JsonArrayItem::JsonArrayItem(ValueType _type, void *_value_ptr)
 
 void JsonArray::addNull()
 {
+    // 对null值的处理：用一个空指针表示
     JsonArrayItem *v = new JsonArrayItem(Null, nullptr);
     this->items.push_back(v);
 }
@@ -231,7 +231,7 @@ void JsonArray::removeItem(int index)
     items.erase(it);
 }
 
-// 没查找到时返回空指针
+// 根据key索引键值对，没查找到时返回空指针
 JsonObjectItem *JsonObject::getItemByName(const char *key)
 {
     string temp(key);
@@ -245,7 +245,7 @@ JsonObjectItem *JsonObject::getItemByName(const char *key)
     return nullptr;
 }
 
-// 没查找到时返回空指针
+// 根据位置索引变量值，没查找到时返回空指针
 JsonArrayItem *JsonArray::getItemByIndex(int index)
 {
     try
@@ -278,6 +278,7 @@ void JsonObject::dump(const char *file_name)
 
 void JsonObjectItem::printItem(int depth)
 {
+    // 控制tab数
     for (int i = 0; i < depth; i++)
         cout << "\t";
     cout << "\"";
@@ -315,6 +316,7 @@ void JsonObjectItem::printItem(int depth)
                 cout << "," << endl;
         }
         cout << endl;
+        // 控制tab数
         for (int i = 0; i < depth; i++)
             cout << "\t";
         cout << "}";
@@ -332,6 +334,7 @@ void JsonObjectItem::printItem(int depth)
                 cout << "," << endl;
         }
         cout << endl;
+        // 控制tab数
         for (int i = 0; i < depth; i++)
             cout << "\t";
         cout << "]";
@@ -345,6 +348,7 @@ void JsonObjectItem::printItem(int depth)
 
 void JsonArrayItem::printItem(int depth)
 {
+    // 控制tab数
     for (int i = 0; i < depth; i++)
         cout << "\t";
     switch (type)
@@ -378,6 +382,7 @@ void JsonArrayItem::printItem(int depth)
                 cout << "," << endl;
         }
         cout << endl;
+        // 控制tab数
         for (int i = 0; i < depth; i++)
             cout << "\t";
         cout << "}";
@@ -395,6 +400,7 @@ void JsonArrayItem::printItem(int depth)
                 cout << "," << endl;
         }
         cout << endl;
+        // 控制tab数
         for (int i = 0; i < depth; i++)
             cout << "\t";
         cout << "]";
