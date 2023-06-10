@@ -70,7 +70,7 @@ int main()
 
     her_json->removeItem("her array is the same as mine ");
     her_json->insertString("this is a test for modify", "so that you can change the JsonObject variable by removing and inserting");
-    her_array->removeItem(1);
+    my_array->removeItem(1);
 
     her_json->dump("F:\\1大二下\\OOP\\test\\modify_test.json");
 
